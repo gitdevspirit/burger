@@ -27,7 +27,7 @@ public class BurgerMod implements ClientModInitializer {
 	 * @return an Identifier with burger namespace
 	 */
 	public static Identifier id(String path) {
-		return Identifier.of(NAMESPACE, path);
+		return Identifier.fromNamespaceAndPath(NAMESPACE, path);
 	}
 
 	/**
