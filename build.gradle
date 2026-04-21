@@ -14,25 +14,23 @@ repositories {
 }
 
 dependencies {
-	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings loom.officialMojangMappings()
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
-	// Fabric API
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+}
+
+processResources {
+	inputs.property "version", project.version
+	filteringCharset "UTF-8"
+
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
+	}
 }
 
 base {
 	archivesName = project.archives_base_name
-}
-
-tasks.withType(ProcessResources).configureEach {
-	inputs.property "version", project.version
-
-	filesMatching("fabric.mod.json") {
-		expand "version": inputs.properties.version
-	}
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -42,6 +40,7 @@ tasks.withType(JavaCompile).configureEach {
 java {
 	sourceCompatibility = JavaVersion.VERSION_21
 	targetCompatibility = JavaVersion.VERSION_21
+	withSourcesJar()
 }
 
 jar {
