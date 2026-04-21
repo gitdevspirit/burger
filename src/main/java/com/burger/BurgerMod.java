@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,13 +21,13 @@ public class BurgerMod implements ClientModInitializer {
 	public static final String VERSION = BURGER_MOD.getMetadata().getVersion().getFriendlyString();
 
 	/**
-	 * Create a ResourceLocation with the burger namespace
+	 * Create an Identifier with the burger namespace
 	 * 
 	 * @param path the path for the resource
-	 * @return a ResourceLocation with burger namespace
+	 * @return an Identifier with burger namespace
 	 */
-	public static ResourceLocation id(String path) {
-		return ResourceLocation.fromNamespaceAndPath(NAMESPACE, path);
+	public static Identifier id(String path) {
+		return Identifier.of(NAMESPACE, path);
 	}
 
 	/**
@@ -60,16 +60,4 @@ public class BurgerMod implements ClientModInitializer {
 	 * Initialize all features and modules
 	 * Add your feature initialization here
 	 */
-	private void init() {
-		// Initialize config
-		com.burger.config.BurgerConfig.load();
-		
-		// Initialize features
-		com.burger.features.WelcomeMessage.init();
-		
-		// TODO: Add your custom features here
-		// Example:
-		// MyCustomFeature.init();
-		// AnotherFeature.init();
-	}
-}
+	pr
