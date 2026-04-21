@@ -60,4 +60,13 @@ public class BurgerMod implements ClientModInitializer {
 	 * Initialize all features and modules
 	 * Add your feature initialization here
 	 */
-	pr
+	private void init() {
+		// Initialize config
+		com.burger.config.BurgerConfig.load();
+		
+		// Initialize features
+		com.burger.features.WelcomeMessage.init();
+		
+		// TODO: Add your custom features here
+	}
+}
