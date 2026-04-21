@@ -5,6 +5,7 @@ plugins {
 
 version = project.mod_version
 group = project.maven_group
+archivesBaseName = project.archives_base_name
 
 repositories {
 	mavenCentral()
@@ -19,6 +20,7 @@ dependencies {
 
 processResources {
 	inputs.property "version", project.version
+	filteringCharset "UTF-8"
 
 	filesMatching("fabric.mod.json") {
 		expand "version": project.version
@@ -33,6 +35,6 @@ java {
 
 jar {
 	from("LICENSE") {
-		rename { "${it}_${project.archives_base_name}" }
+		rename { "${it}_${archivesBaseName}" }
 	}
 }
