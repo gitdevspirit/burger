@@ -1,6 +1,8 @@
 package com.burger;
 
+import com.burger.commands.BurgerCommand;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
@@ -40,6 +42,9 @@ public class BurgerMod implements ClientModInitializer {
 		
 		// Register tick event
 		ClientTickEvents.END_CLIENT_TICK.register(this::tick);
+		
+		// Register commands
+		ClientCommandRegistrationCallback.EVENT.register(BurgerCommand::register);
 		
 		// Initialize your features here
 		init();
