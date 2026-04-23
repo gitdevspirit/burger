@@ -48,7 +48,7 @@ public class Utils {
 	 */
 	public static void sendMessage(String message) {
 		if (getPlayer() != null) {
-			getPlayer().sendSystemMessage(Component.literal(message));
+			getPlayer().displayClientMessage(Component.literal(message), false);
 		}
 	}
 	
@@ -58,7 +58,7 @@ public class Utils {
 	 */
 	public static void sendMessage(Component message) {
 		if (getPlayer() != null) {
-			getPlayer().sendSystemMessage(message);
+			getPlayer().displayClientMessage(message, false);
 		}
 	}
 	
