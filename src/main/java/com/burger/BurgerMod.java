@@ -1,13 +1,15 @@
 package com.burger;
 
-import com.burger.commands.BurgerCommand;
+import com.burger.gui.BurgerScreen;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
+import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +23,9 @@ public class BurgerMod implements ClientModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger("Burger");
 	public static final ModContainer BURGER_MOD = FabricLoader.getInstance().getModContainer(NAMESPACE).orElseThrow();
 	public static final String VERSION = BURGER_MOD.getMetadata().getVersion().getFriendlyString();
+
+	// Keybind to open GUI
+	private static KeyMapping openGuiKey;
 
 	/**
 	 * Create an Identifier with the burger namespace
@@ -40,16 +45,20 @@ public class BurgerMod implements ClientModInitializer {
 	public void onInitializeClient() {
 		LOGGER.info("Burger v{} is initializing!", VERSION);
 		
+		// Register keybind (Right Shift by default)
+		openGuiKey = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+			"key.burger.open_gui",
+			GLFW.GLFW_KEY_RIGHT_SHIFT,
+			"key.categories.burger"
+		));
+		
 		// Register tick event
 		ClientTickEvents.END_CLIENT_TICK.register(this::tick);
-		
-		// Register commands
-		ClientCommandRegistrationCallback.EVENT.register(BurgerCommand::register);
 		
 		// Initialize your features here
 		init();
 		
-		LOGGER.info("Burger loaded successfully!");
+		LOGGER.info("Burger loaded successfully! Press RIGHT SHIFT to open the menu.");
 	}
 
 	/**
@@ -58,7 +67,12 @@ public class BurgerMod implements ClientModInitializer {
 	 * @param client the Minecraft client instance
 	 */
 	private void tick(Minecraft client) {
-		// Add your tick logic here
+		// Check if GUI keybind is pressed
+		while (openGuiKey.consumeClick()) {
+			if (client.screen == null) {
+				client.setScreen(new BurgerScreen(null));
+			}
+		}
 	}
 
 	/**
