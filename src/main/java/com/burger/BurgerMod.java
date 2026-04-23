@@ -49,7 +49,7 @@ public class BurgerMod implements ClientModInitializer {
 		openGuiKey = KeyBindingHelper.registerKeyBinding(new KeyMapping(
 			"key.burger.open_gui",
 			GLFW.GLFW_KEY_RIGHT_SHIFT,
-			"key.categories.burger"
+			KeyMapping.Category.MISC
 		));
 		
 		// Register tick event
