@@ -7,11 +7,7 @@
   "authors": [
     "Spirit"
   ],
-  "contact": {
-    "homepage": "https://github.com/yourusername/burger",
-    "sources": "https://github.com/yourusername/burger",
-    "issues": "https://github.com/yourusername/burger/issues"
-  },
+  "contact": {},
   "license": "MIT",
   "icon": "assets/burger/icon.png",
   "environment": "client",
